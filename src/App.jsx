@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { AlbumsId, getSongsFromAlbum } from "./services/fetchItunes";
-import "./App.css";
+import { useEffect, useState } from 'react';
+import { AlbumsId, getSongsFromAlbum } from './services/fetchItunes';
+import './App.css';
 
 function App() {
   const [album, setAlbum] = useState(null);
@@ -16,13 +16,13 @@ function App() {
     // waits the Promise to resolve, and if ignore is "false", sets data to "album"
     getSongsFromAlbum(AlbumsId.pleasePleaseMe)
       .then((result) => {
-      if (!ignore) {
-        setAlbum(result);
-      }
-    })
+        if (!ignore) {
+          setAlbum(result);
+        }
+      })
       .catch((error) => {
         if (!ignore) {
-          setError(error.message)
+          setError(error.message);
         }
       });
 
@@ -32,10 +32,9 @@ function App() {
     };
   }, []);
 
-  if (error) return <h1>Something bad happened...</h1>
-  
-  if (!album) return <h1>Loading...</h1>;
+  if (error) return <h1>Something bad happened...</h1>;
 
+  if (!album) return <h1>Loading...</h1>;
 
   if (album)
     return (
