@@ -6,20 +6,20 @@ function App() {
   const [album, setAlbum] = useState(null);
 
   useEffect(() => {
-    // ignora a chamada da api caso o componente esteja desmontando
+    // ignores the api call if the component is unmounted
     let ignore = false;
     
-    // indica que uma nova chamada da API está em andamento
+    // indicates that a new api call is in progress
     setAlbum(null);
 
-    // espera a Promise ser resolvida e se ignore for falso, "seta" o álbum
+    // waits the Promise to resolve, and if ignore is "false", sets data to "album"
     getSongsFromAlbum(AlbumsId.pleasePleaseMe).then((result) => {
       if (!ignore) {
         setAlbum(result);
       }
     });
 
-    // cleanup function: sinaliza que a atualização de estado de ser ignorada
+    // cleanup function: signals that the state update must be ignored
     return () => {
       ignore = true;
     };
