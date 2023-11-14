@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { AlbumsId, getSongsFromAlbum } from './services/fetchItunes';
 import './App.css';
+import { getRandomIntInclusive } from './utils/getRandomIntInclusive';
 
 function App() {
   const [album, setAlbum] = useState(null);
   const [error, setError] = useState(null);
+  const [sortedNumber, setSortedNumber] = useState(null);
 
   useEffect(() => {
     // ignores the api call if the component is unmounted
@@ -18,6 +20,7 @@ function App() {
       .then((result) => {
         if (!ignore) {
           setAlbum(result);
+          setSortedNumber(getRandomIntInclusive(0, result.resultCount));
         }
       })
       .catch((error) => {
@@ -40,10 +43,13 @@ function App() {
     return (
       <>
         <div>
-          <h1 className="title">One-Second Guessing Challenge</h1>
+          <h1>One-Second Guessing Challenge</h1>
           <h2>The Beatles Edition</h2>
 
           <p>{album.results[2].trackName}</p>
+
+          <p>total of results: {album.resultCount}</p>
+          <p>sorted: {sortedNumber}</p>
 
           <audio
             sandbox="allow-same-origin"
