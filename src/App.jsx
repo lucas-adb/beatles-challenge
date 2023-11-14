@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AlbumsId, getSongsFromAlbum } from './services/fetchItunes';
-import './App.css';
 import { getRandomIntInclusive } from './utils/getRandomIntInclusive';
+import './App.css';
 
 function App() {
   const [album, setAlbum] = useState(null);
@@ -9,6 +9,7 @@ function App() {
   const [error, setError] = useState(null);
   const [sortedNumber, setSortedNumber] = useState(null);
   const [answer, setAnswer] = useState('');
+  const [tracksPlayed, setTracksPlayed] = useState([]);
 
   useEffect(() => {
     // ignores the api call if the component is unmounted
@@ -43,6 +44,10 @@ function App() {
     };
   }, []);
 
+  const storePlayedTracksID = () => {
+    setTracksPlayed([...tracksPlayed, tracks[sortedNumber].trackId]);
+  };
+
   const checkAnswer = () => {
     if (answer !== tracks[sortedNumber].trackName) {
       alert('Wrong :(');
@@ -54,6 +59,7 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     checkAnswer();
+    storePlayedTracksID();
   };
 
   if (error) return <h1>Something bad happened...</h1>;
