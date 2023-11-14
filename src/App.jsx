@@ -8,6 +8,7 @@ function App() {
   const [tracks, setTracks] = useState(null);
   const [error, setError] = useState(null);
   const [sortedNumber, setSortedNumber] = useState(null);
+  const [answer, setAnswer] = useState('');
 
   useEffect(() => {
     // ignores the api call if the component is unmounted
@@ -42,6 +43,19 @@ function App() {
     };
   }, []);
 
+  const checkAnswer = () => {
+    if (answer !== tracks[sortedNumber].trackName) {
+      alert('Wrong :(');
+    } else {
+      alert('Correct :)');
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    checkAnswer();
+  };
+
   if (error) return <h1>Something bad happened...</h1>;
 
   if (!album) return <h1>Loading...</h1>;
@@ -64,6 +78,17 @@ function App() {
             controls
             src={tracks[sortedNumber].previewUrl}
           ></audio>
+
+          <p>Guess the song</p>
+
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+            />
+            <button>Answer</button>
+          </form>
         </div>
       </>
     );
