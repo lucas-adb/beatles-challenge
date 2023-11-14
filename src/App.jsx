@@ -1,10 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AlbumsId, getSongsFromAlbum } from "./services/fetchItunes";
 import "./App.css";
 
 function App() {
+  const [album, setAlbum] = useState(null);
+
+  // useEffect(() => {
+  //   getSongsFromAlbum(AlbumsId.pleasePleaseMe);
+  // }, []);
+
   useEffect(() => {
-    getSongsFromAlbum(AlbumsId.pleasePleaseMe);
+    let ignore = false;
+    setAlbum(null);
+    getSongsFromAlbum(AlbumsId.pleasePleaseMe).then((result) => {
+      if (!ignore) {
+        setAlbum(result);
+      }
+    });
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   return (
@@ -13,12 +28,16 @@ function App() {
         <h1 className="title">One-Second Guessing Challenge</h1>
         <h2>The Beatles Edition</h2>
 
-        <iframe
-          sandbox="allow-same-origin"
-          src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/be/3b/4c/be3b4c09-fdb6-f8ee-edfd-b51080e8f64b/mzaf_1609395497452904676.plus.aac.p.m4a"
-          width="375"
-          height="30"
-        ></iframe>
+        {album && <p>{album.results[2].trackName}</p>}
+
+        {album && (
+          <iframe
+            sandbox="allow-same-origin"
+            src={album.results[2].previewUrl}
+            width="375"
+            height="30"
+          ></iframe>
+        )}
       </div>
     </>
   );
