@@ -5,6 +5,7 @@ import { getRandomIntInclusive } from './utils/getRandomIntInclusive';
 
 function App() {
   const [album, setAlbum] = useState(null);
+  const [tracks, setTracks] = useState(null);
   const [error, setError] = useState(null);
   const [sortedNumber, setSortedNumber] = useState(null);
 
@@ -20,7 +21,13 @@ function App() {
       .then((result) => {
         if (!ignore) {
           setAlbum(result);
-          setSortedNumber(getRandomIntInclusive(0, result.resultCount));
+
+          const newTracks = result.results.filter(
+            (track) => track.kind === 'song'
+          );
+
+          setTracks(newTracks);
+          setSortedNumber(getRandomIntInclusive(0, newTracks.length));
         }
       })
       .catch((error) => {
@@ -46,15 +53,16 @@ function App() {
           <h1>One-Second Guessing Challenge</h1>
           <h2>The Beatles Edition</h2>
 
-          <p>{album.results[2].trackName}</p>
-
-          <p>total of results: {album.resultCount}</p>
           <p>sorted: {sortedNumber}</p>
+
+          <p>track name: {tracks[sortedNumber].trackName}</p>
+
+          <p>total of tracks: {tracks.length}</p>
 
           <audio
             sandbox="allow-same-origin"
             controls
-            src={album.results[2].previewUrl}
+            src={tracks[sortedNumber].previewUrl}
           ></audio>
         </div>
       </>
