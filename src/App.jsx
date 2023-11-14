@@ -9,7 +9,7 @@ function App() {
   const [error, setError] = useState(null);
   const [sortedNumber, setSortedNumber] = useState(null);
   const [answer, setAnswer] = useState('');
-  const [tracksPlayed, setTracksPlayed] = useState([]);
+  const [playedTracksId, setPlayedTracksId] = useState([]);
 
   useEffect(() => {
     // ignores the api call if the component is unmounted
@@ -44,22 +44,29 @@ function App() {
     };
   }, []);
 
+  const goToNextTrack = () => {
+    const newTracks = tracks.filter((t) => !playedTracksId.includes(t.trackId));
+    setTracks(newTracks);
+    setSortedNumber(getRandomIntInclusive(0, newTracks.length));
+  };
+
   const storePlayedTracksID = () => {
-    setTracksPlayed([...tracksPlayed, tracks[sortedNumber].trackId]);
+    setPlayedTracksId([...playedTracksId, tracks[sortedNumber].trackId]);
   };
 
   const checkAnswer = () => {
     if (answer !== tracks[sortedNumber].trackName) {
       alert('Wrong :(');
     } else {
+      goToNextTrack();
       alert('Correct :)');
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    checkAnswer();
     storePlayedTracksID();
+    checkAnswer();
   };
 
   if (error) return <h1>Something bad happened...</h1>;
@@ -75,7 +82,7 @@ function App() {
 
           <p>sorted: {sortedNumber}</p>
 
-          <p>track name: {tracks[sortedNumber].trackName}</p>
+          <p>track name: {tracks[sortedNumber]?.trackName}</p>
 
           <p>total of tracks: {tracks.length}</p>
 
