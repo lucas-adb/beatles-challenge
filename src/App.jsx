@@ -5,18 +5,21 @@ import "./App.css";
 function App() {
   const [album, setAlbum] = useState(null);
 
-  // useEffect(() => {
-  //   getSongsFromAlbum(AlbumsId.pleasePleaseMe);
-  // }, []);
-
   useEffect(() => {
+    // ignora a chamada da api caso o componente esteja desmontando
     let ignore = false;
+    
+    // indica que uma nova chamada da API está em andamento
     setAlbum(null);
+
+    // espera a Promise ser resolvida e se ignore for falso, "seta" o álbum
     getSongsFromAlbum(AlbumsId.pleasePleaseMe).then((result) => {
       if (!ignore) {
         setAlbum(result);
       }
     });
+
+    // cleanup function: sinaliza que a atualização de estado de ser ignorada
     return () => {
       ignore = true;
     };
@@ -29,14 +32,13 @@ function App() {
         <h2>The Beatles Edition</h2>
 
         {album && <p>{album.results[2].trackName}</p>}
-
+  
         {album && (
-          <iframe
+          <audio
             sandbox="allow-same-origin"
+            controls
             src={album.results[2].previewUrl}
-            width="375"
-            height="30"
-          ></iframe>
+          ></audio>
         )}
       </div>
     </>
