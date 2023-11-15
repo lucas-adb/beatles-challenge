@@ -4,7 +4,8 @@ import { useStore } from './store/gameStore';
 import { getSongsFromAlbum } from './services/fetchItunes';
 
 function App() {
-  const { count, inc, songsByAlbum, setSongsByAlbum } = useStore();
+  const { songsByAlbum, sortedNumber, actions } = useStore();
+  const { setSongsByAlbum, sortNumber } = actions;
 
   useEffect(() => {
     let ignore = false;
@@ -12,6 +13,7 @@ function App() {
       .then((response) => {
         if (!ignore) {
           setSongsByAlbum(response.data.results);
+          sortNumber();
         }
       })
       .catch((error) => {
@@ -23,19 +25,22 @@ function App() {
     return () => {
       ignore = true;
     };
-  }, [setSongsByAlbum]);
-
-  console.log(songsByAlbum);
+  }, [setSongsByAlbum, sortNumber]);
 
   return (
     <>
       <div>
-        <h1>zustand</h1>
+        <h1>Beatles Challenge</h1>
         <div>
-          <span>{count}</span>
-          <button onClick={inc}>one up</button>
+          <p>{songsByAlbum[sortedNumber]?.trackName}</p>
+          <p>total of tracks: {songsByAlbum?.length}</p>
+          <p>sorted number: {sortedNumber}</p>
         </div>
-        <p>{songsByAlbum[0]?.trackName}</p>
+        <audio
+          sandbox="allow-same-origin"
+          controls
+          src={songsByAlbum[sortedNumber]?.previewUrl}
+        ></audio>
       </div>
     </>
   );
