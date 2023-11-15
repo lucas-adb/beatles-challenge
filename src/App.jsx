@@ -4,8 +4,10 @@ import { useStore } from './store/gameStore';
 import { getSongsFromAlbum } from './services/fetchItunes';
 
 function App() {
-  const { songsByAlbum, sortedNumber, actions } = useStore();
-  const { setSongsByAlbum, sortNumber } = actions;
+  const { songsByAlbum, sortedNumber, answer, playedTracksId, actions } =
+    useStore();
+  const { setSongsByAlbum, sortNumber, saveAnswer, savePlayedTracksId } =
+    actions;
 
   useEffect(() => {
     let ignore = false;
@@ -27,20 +29,50 @@ function App() {
     };
   }, [setSongsByAlbum, sortNumber]);
 
+  // FUNCTIONS
+
+  const checkAnswer = () => {
+    if (answer !== songsByAlbum[sortedNumber].trackName) {
+      alert('Wrong :(');
+    } else {
+      // storePlayedTracksID();
+      // goToNextTrack();
+      alert('Correct :)');
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    checkAnswer();
+    savePlayedTracksId();
+  };
+
+  console.log('playedTracksId', playedTracksId);
+
   return (
     <>
       <div>
         <h1>Beatles Challenge</h1>
         <div>
-          <p>{songsByAlbum[sortedNumber]?.trackName}</p>
+          <p>answer: {songsByAlbum[sortedNumber]?.trackName}</p>
           <p>total of tracks: {songsByAlbum?.length}</p>
           <p>sorted number: {sortedNumber}</p>
         </div>
+
         <audio
           sandbox="allow-same-origin"
           controls
           src={songsByAlbum[sortedNumber]?.previewUrl}
         ></audio>
+
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={answer}
+            onChange={(e) => saveAnswer(e.target.value)}
+          />
+          <button>Answer</button>
+        </form>
       </div>
     </>
   );
