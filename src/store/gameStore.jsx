@@ -18,7 +18,7 @@ export const useStore = create((set, get) => ({
       }),
     sortNumber: () =>
       set(() => {
-        const { songsByAlbum, playedTracksId } = get();
+        const { songsByAlbum, playedTracksId, sortedNumber } = get();
 
         // const newRandomNumber = getRandomIntInclusive(0, songsByAlbum.length);
 
@@ -26,8 +26,8 @@ export const useStore = create((set, get) => ({
           return {
             sortedNumber: excludeUsedRandomNumber(
               playedTracksId,
-              songsByAlbum
-              // newRandomNumber
+              songsByAlbum,
+              sortedNumber
             ),
           };
         }

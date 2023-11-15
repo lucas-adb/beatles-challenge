@@ -44,8 +44,13 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     checkAnswer();
-    savePlayedTracksId();
-    sortNumber();
+
+    if (playedTracksId.length >= songsByAlbum.length) {
+      alert('You did 100% of the songs');
+    } else {
+      savePlayedTracksId();
+      sortNumber();
+    }
   };
 
   console.log('playedTracksId', playedTracksId);
@@ -72,7 +77,9 @@ function App() {
             value={answer}
             onChange={(e) => saveAnswer(e.target.value)}
           />
-          <button>Answer</button>
+          <button disabled={playedTracksId.length >= songsByAlbum.length}>
+            Answer
+          </button>
         </form>
       </div>
     </>
