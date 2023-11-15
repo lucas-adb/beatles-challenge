@@ -4,10 +4,10 @@ import { getRandomIntInclusive } from './utils/getRandomIntInclusive';
 import './App.css';
 
 function App() {
-  const [album, setAlbum] = useState(null);
-  const [tracks, setTracks] = useState(null);
   const [error, setError] = useState(null);
   const [sortedNumber, setSortedNumber] = useState(null);
+  const [album, setAlbum] = useState(null);
+  const [tracks, setTracks] = useState(null);
   const [answer, setAnswer] = useState('');
   const [playedTracksId, setPlayedTracksId] = useState([]);
 
@@ -28,7 +28,10 @@ function App() {
             (track) => track.kind === 'song'
           );
 
-          setTracks(newTracks);
+          setTracks(() => {
+            return [...newTracks];
+          });
+
           setSortedNumber(getRandomIntInclusive(0, newTracks.length));
         }
       })
@@ -44,20 +47,52 @@ function App() {
     };
   }, []);
 
-  const goToNextTrack = () => {
+  // const goToNextTrack = () => {
+  //   const newTracks = tracks.filter((t) => !playedTracksId.includes(t.trackId));
+  //   // setTracks(newTracks);
+  //   setTracks((prevTracks) => {
+  //     return [...newTracks];
+  //   });
+  //   setSortedNumber(getRandomIntInclusive(0, newTracks.length));
+  // };
+
+  // const storePlayedTracksID = () => {
+  //   // setPlayedTracksId([...playedTracksId, tracks[sortedNumber].trackId]);
+  //   setPlayedTracksId((prevTracks) => [
+  //     ...prevTracks,
+  //     tracks[sortedNumber].trackId,
+  //   ]);
+  // };
+
+  const goToNextTrack = (playedTracksId = []) => {
     const newTracks = tracks.filter((t) => !playedTracksId.includes(t.trackId));
-    setTracks(newTracks);
+    setTracks(() => {
+      return [...newTracks];
+    });
     setSortedNumber(getRandomIntInclusive(0, newTracks.length));
   };
 
   const storePlayedTracksID = () => {
-    setPlayedTracksId([...playedTracksId, tracks[sortedNumber].trackId]);
+    setPlayedTracksId((prevTracks) => {
+      const newPlayedTracksId = [...prevTracks, tracks[sortedNumber].trackId];
+      goToNextTrack(newPlayedTracksId);
+      return newPlayedTracksId;
+    });
   };
+
+  // const goToNextTrack = (playedTracksId) => {
+  //   const newTracks = tracks.filter((t) => !playedTracksId.includes(t.trackId));
+  //   setTracks(() => {
+  //     return [...newTracks];
+  //   });
+  //   setSortedNumber(getRandomIntInclusive(0, newTracks.length));
+  // };
 
   const checkAnswer = () => {
     if (answer !== tracks[sortedNumber].trackName) {
       alert('Wrong :(');
     } else {
+      storePlayedTracksID();
       goToNextTrack();
       alert('Correct :)');
     }
@@ -65,7 +100,7 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    storePlayedTracksID();
+    // storePlayedTracksID();
     checkAnswer();
   };
 
@@ -82,7 +117,7 @@ function App() {
 
           <p>sorted: {sortedNumber}</p>
 
-          <p>track name: {tracks[sortedNumber]?.trackName}</p>
+          <p>track name: {tracks[sortedNumber].trackName}</p>
 
           <p>total of tracks: {tracks.length}</p>
 
