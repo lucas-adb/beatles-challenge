@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { getRandomIntInclusive } from '../utils/getRandomIntInclusive';
+import { excludeUsedRandomNumber } from '../utils/excludeUsedRandomNumber';
 
 export const useStore = create((set, get) => ({
   count: 1,
@@ -17,10 +18,27 @@ export const useStore = create((set, get) => ({
       }),
     sortNumber: () =>
       set(() => {
-        const { songsByAlbum } = get();
+        const { songsByAlbum, playedTracksId } = get();
+
+        // const newRandomNumber = getRandomIntInclusive(0, songsByAlbum.length);
+
+        if (playedTracksId.length > 0) {
+          return {
+            sortedNumber: excludeUsedRandomNumber(
+              playedTracksId,
+              songsByAlbum
+              // newRandomNumber
+            ),
+          };
+        }
+
         return {
-          sortedNumber: getRandomIntInclusive(0, songsByAlbum.length),
+          sortedNumber: getRandomIntInclusive(0, songsByAlbum.length - 1),
         };
+
+        // return {
+        //   sortedNumber: getRandomIntInclusive(0, songsByAlbum.length),
+        // };
       }),
     saveAnswer: (eventTargetValue) => set(() => ({ answer: eventTargetValue })),
     savePlayedTracksId: () =>

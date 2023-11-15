@@ -45,6 +45,7 @@ function App() {
     event.preventDefault();
     checkAnswer();
     savePlayedTracksId();
+    sortNumber();
   };
 
   console.log('playedTracksId', playedTracksId);
