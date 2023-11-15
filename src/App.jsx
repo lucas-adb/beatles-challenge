@@ -32,7 +32,8 @@ function App() {
             return [...newTracks];
           });
 
-          setSortedNumber(getRandomIntInclusive(0, newTracks.length));
+          // setSortedNumber(getRandomIntInclusive(0, newTracks.length));
+          setSortedNumber(() => getRandomIntInclusive(0, newTracks.length));
         }
       })
       .catch((error) => {
@@ -47,29 +48,13 @@ function App() {
     };
   }, []);
 
-  // const goToNextTrack = () => {
-  //   const newTracks = tracks.filter((t) => !playedTracksId.includes(t.trackId));
-  //   // setTracks(newTracks);
-  //   setTracks((prevTracks) => {
-  //     return [...newTracks];
-  //   });
-  //   setSortedNumber(getRandomIntInclusive(0, newTracks.length));
-  // };
-
-  // const storePlayedTracksID = () => {
-  //   // setPlayedTracksId([...playedTracksId, tracks[sortedNumber].trackId]);
-  //   setPlayedTracksId((prevTracks) => [
-  //     ...prevTracks,
-  //     tracks[sortedNumber].trackId,
-  //   ]);
-  // };
-
   const goToNextTrack = (playedTracksId = []) => {
     const newTracks = tracks.filter((t) => !playedTracksId.includes(t.trackId));
     setTracks(() => {
       return [...newTracks];
     });
-    setSortedNumber(getRandomIntInclusive(0, newTracks.length - 1));
+    // setSortedNumber(getRandomIntInclusive(0, newTracks.length - 1));
+    setSortedNumber(() => getRandomIntInclusive(0, newTracks.length - 1));
   };
 
   const storePlayedTracksID = () => {
@@ -79,14 +64,6 @@ function App() {
       return newPlayedTracksId;
     });
   };
-
-  // const goToNextTrack = (playedTracksId) => {
-  //   const newTracks = tracks.filter((t) => !playedTracksId.includes(t.trackId));
-  //   setTracks(() => {
-  //     return [...newTracks];
-  //   });
-  //   setSortedNumber(getRandomIntInclusive(0, newTracks.length));
-  // };
 
   const checkAnswer = () => {
     if (answer !== tracks[sortedNumber].trackName) {
