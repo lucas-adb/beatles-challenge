@@ -69,7 +69,7 @@ function App() {
     setTracks(() => {
       return [...newTracks];
     });
-    setSortedNumber(getRandomIntInclusive(0, newTracks.length));
+    setSortedNumber(getRandomIntInclusive(0, newTracks.length - 1));
   };
 
   const storePlayedTracksID = () => {
@@ -108,7 +108,7 @@ function App() {
 
   if (!album) return <h1>Loading...</h1>;
 
-  if (album)
+  if (tracks && sortedNumber < tracks.length)
     return (
       <>
         <div>
