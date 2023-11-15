@@ -33,24 +33,21 @@ function App() {
 
   const checkAnswer = () => {
     if (answer !== songsByAlbum[sortedNumber].trackName) {
-      alert('Wrong :(');
+      alert("That's Wrong");
+    } else if (playedTracksId.length >= songsByAlbum.length - 1) {
+      alert('Wow, you guessed 100% of the songs. Amazing!');
+      savePlayedTracksId();
     } else {
-      // storePlayedTracksID();
-      // goToNextTrack();
-      alert('Correct :)');
+      alert("That's Right!");
+      savePlayedTracksId();
+      sortNumber();
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    checkAnswer();
 
-    if (playedTracksId.length >= songsByAlbum.length) {
-      alert('You did 100% of the songs');
-    } else {
-      savePlayedTracksId();
-      sortNumber();
-    }
+    checkAnswer();
   };
 
   console.log('playedTracksId', playedTracksId);

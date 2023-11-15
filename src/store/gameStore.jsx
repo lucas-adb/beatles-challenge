@@ -20,8 +20,6 @@ export const useStore = create((set, get) => ({
       set(() => {
         const { songsByAlbum, playedTracksId, sortedNumber } = get();
 
-        // const newRandomNumber = getRandomIntInclusive(0, songsByAlbum.length);
-
         if (playedTracksId.length > 0) {
           return {
             sortedNumber: excludeUsedRandomNumber(
@@ -35,10 +33,6 @@ export const useStore = create((set, get) => ({
         return {
           sortedNumber: getRandomIntInclusive(0, songsByAlbum.length - 1),
         };
-
-        // return {
-        //   sortedNumber: getRandomIntInclusive(0, songsByAlbum.length),
-        // };
       }),
     saveAnswer: (eventTargetValue) => set(() => ({ answer: eventTargetValue })),
     savePlayedTracksId: () =>
