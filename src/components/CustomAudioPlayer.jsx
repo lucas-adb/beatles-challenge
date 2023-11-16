@@ -1,12 +1,12 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useStore } from '../store/GameStore';
 
 export default function CustomAudioPlayer() {
-  const [duration, setDuration] = useState(0);
-  const [pausedTime, setPausedTime] = useState(0);
   const audioRef = useRef();
 
-  const { songsByAlbum, sortedNumber } = useStore();
+  const { songsByAlbum, sortedNumber, duration, pausedTime, actions } =
+    useStore();
+  const { setDuration, setPausedTime } = actions;
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
@@ -16,6 +16,9 @@ export default function CustomAudioPlayer() {
       audio.pause();
     }
   };
+
+  console.log('duration', duration);
+  console.log('pausedTime', pausedTime);
 
   return (
     <>
