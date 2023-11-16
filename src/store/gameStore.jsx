@@ -12,6 +12,7 @@ export const useStore = create((set, get) => ({
   pausedTime: 0,
   score: 0,
   nameOfTheSongs: [],
+  isAnswerCorrect: null,
 
   actions: {
     inc: () => set((state) => ({ count: state.count + 1 })),
@@ -67,5 +68,7 @@ export const useStore = create((set, get) => ({
         const songNames = objFilteredByKind.map((song) => song.trackName);
         return { nameOfTheSongs: songNames };
       }),
+    setIsAnswerCorrectAsTrue: () => set(() => ({ isAnswerCorrect: true })),
+    setIsAnswerCorrectAsFalse: () => set(() => ({ isAnswerCorrect: false })),
   },
 }));

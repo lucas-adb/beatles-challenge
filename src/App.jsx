@@ -8,8 +8,14 @@ import GuessForm from './components/GuessForm';
 import Container from '@mui/material/Container';
 
 function App() {
-  const { songsByAlbum, sortedNumber, score, playedTracksId, actions } =
-    useStore();
+  const {
+    songsByAlbum,
+    sortedNumber,
+    score,
+    playedTracksId,
+    isAnswerCorrect,
+    actions,
+  } = useStore();
   const { setSongsByAlbum, sortNumber, setNameOfTheSongs } = actions;
 
   useEffect(() => {
@@ -45,6 +51,10 @@ function App() {
             <p>Score: {score} </p>
             <p>Correct guesses: {playedTracksId.length} </p>
           </div>
+
+          {isAnswerCorrect !== null && (
+            <div>{isAnswerCorrect ? 'Correct!' : 'Wrong!'}</div>
+          )}
 
           <CustomAudioPlayer />
 

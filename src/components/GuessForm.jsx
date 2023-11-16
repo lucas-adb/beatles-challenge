@@ -5,17 +5,24 @@ import ComboBox from './ComboBox';
 export default function GuessForm() {
   const { songsByAlbum, answer, playedTracksId, sortedNumber, actions } =
     useStore();
-  const { savePlayedTracksId, sortNumber, setScore, eraseAnswer } = actions;
+  const {
+    savePlayedTracksId,
+    sortNumber,
+    setScore,
+    eraseAnswer,
+    setIsAnswerCorrectAsFalse,
+    setIsAnswerCorrectAsTrue,
+  } = actions;
 
   const checkAnswer = () => {
     if (answer !== songsByAlbum[sortedNumber].trackName) {
-      alert("That's Wrong");
+      setIsAnswerCorrectAsFalse();
     } else if (playedTracksId.length >= songsByAlbum.length - 1) {
-      alert('Wow, you guessed 100% of the songs. Amazing!');
+      setIsAnswerCorrectAsTrue();
       savePlayedTracksId();
       setScore();
     } else {
-      alert("That's Right!");
+      setIsAnswerCorrectAsTrue();
       savePlayedTracksId();
       sortNumber();
       setScore();
