@@ -1,24 +1,26 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useStore } from '../store/GameStore';
+import IconButton from '@mui/material/IconButton';
+import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
+import StopCircleIcon from '@mui/icons-material/StopCircle';
 
 export default function CustomAudioPlayer() {
   const audioRef = useRef();
 
-  const { songsByAlbum, sortedNumber, duration, pausedTime, actions } =
-    useStore();
+  const { songsByAlbum, sortedNumber, actions } = useStore();
   const { setDuration, setPausedTime } = actions;
+
+  const [clicked, setClicked] = useState(false);
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
+    setClicked(!clicked);
     if (audio.paused) {
       audio.play();
     } else {
       audio.pause();
     }
   };
-
-  console.log('duration', duration);
-  console.log('pausedTime', pausedTime);
 
   return (
     <>
@@ -30,7 +32,13 @@ export default function CustomAudioPlayer() {
         src={songsByAlbum[sortedNumber]?.previewUrl}
       ></audio>
 
-      <button onClick={togglePlayPause}>Play/Pause</button>
+      <IconButton aria-label="delete" onClick={togglePlayPause}>
+        {clicked ? <StopCircleIcon /> : <PlayCircleFilledIcon />}
+      </IconButton>
     </>
   );
+}
+
+{
+  /* <button onClick={togglePlayPause}>Play/Pause</button> */
 }

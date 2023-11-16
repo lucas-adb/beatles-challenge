@@ -35,7 +35,7 @@ function App() {
     return () => {
       ignore = true;
     };
-  }, [setSongsByAlbum, sortNumber]);
+  }, [setSongsByAlbum, sortNumber, setNameOfTheSongs]);
 
   return (
     <>
