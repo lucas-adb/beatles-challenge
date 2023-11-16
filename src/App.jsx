@@ -5,11 +5,7 @@ import { useStore } from './store/GameStore';
 import { getSongsFromAlbum } from './services/fetchItunes';
 import CustomAudioPlayer from './components/CustomAudioPlayer';
 import GuessForm from './components/GuessForm';
-
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import Container from '@mui/material/Container';
 
 function App() {
   const { songsByAlbum, sortedNumber, score, playedTracksId, actions } =
@@ -38,22 +34,24 @@ function App() {
   }, [setSongsByAlbum, sortNumber, setNameOfTheSongs]);
 
   return (
-    <>
-      <div>
-        <h1>Beatles Challenge</h1>
+    <Container maxWidth="sm">
+      <>
         <div>
-          <p>answer: {songsByAlbum[sortedNumber]?.trackName}</p>
-          <p>total of tracks: {songsByAlbum?.length}</p>
-          <p>sorted number: {sortedNumber}</p>
-          <p>Score: {score} </p>
-          <p>Number of correct guesses: {playedTracksId.length} </p>
+          <h1>Beatles Challenge</h1>
+          <div>
+            <p>Answer: {songsByAlbum[sortedNumber]?.trackName}</p>
+            <p>Total of tracks: {songsByAlbum?.length}</p>
+            <p>Sorted number: {sortedNumber}</p>
+            <p>Score: {score} </p>
+            <p>Correct guesses: {playedTracksId.length} </p>
+          </div>
+
+          <CustomAudioPlayer />
+
+          <GuessForm />
         </div>
-
-        <CustomAudioPlayer />
-
-        <GuessForm />
-      </div>
-    </>
+      </>
+    </Container>
   );
 }
 

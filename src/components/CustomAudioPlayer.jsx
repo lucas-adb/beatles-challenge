@@ -33,7 +33,11 @@ export default function CustomAudioPlayer() {
       ></audio>
 
       <IconButton aria-label="delete" onClick={togglePlayPause}>
-        {clicked ? <StopCircleIcon /> : <PlayCircleFilledIcon />}
+        {clicked ? (
+          <StopCircleIcon fontSize="large" />
+        ) : (
+          <PlayCircleFilledIcon fontSize="large" />
+        )}
       </IconButton>
     </>
   );

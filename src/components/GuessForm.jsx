@@ -37,6 +37,7 @@ export default function GuessForm() {
       <Button
         type="submit"
         disabled={playedTracksId.length >= songsByAlbum.length}
+        variant="contained"
       >
         Answer
       </Button>
