@@ -1,5 +1,6 @@
 import { useStore } from '../store/GameStore';
 import Button from '@mui/material/Button';
+import ComboBox from './ComboBox';
 
 export default function GuessForm() {
   const { songsByAlbum, answer, playedTracksId, sortedNumber, actions } =
@@ -35,11 +36,15 @@ export default function GuessForm() {
         value={answer}
         onChange={(e) => saveAnswer(e.target.value)}
       />
-      <button disabled={playedTracksId.length >= songsByAlbum.length}>
-        Answer
-      </button>
 
-      <Button>Mui Button</Button>
+      <Button
+        type="submit"
+        disabled={playedTracksId.length >= songsByAlbum.length}
+      >
+        Answer
+      </Button>
+
+      <ComboBox />
     </form>
   );
 }

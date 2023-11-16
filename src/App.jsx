@@ -14,7 +14,7 @@ import '@fontsource/roboto/700.css';
 function App() {
   const { songsByAlbum, sortedNumber, score, playedTracksId, actions } =
     useStore();
-  const { setSongsByAlbum, sortNumber } = actions;
+  const { setSongsByAlbum, sortNumber, setNameOfTheSongs } = actions;
 
   useEffect(() => {
     let ignore = false;
@@ -22,6 +22,7 @@ function App() {
       .then((response) => {
         if (!ignore) {
           setSongsByAlbum(response.data.results);
+          setNameOfTheSongs(response.data.results);
           sortNumber();
         }
       })

@@ -11,6 +11,7 @@ export const useStore = create((set, get) => ({
   duration: 0,
   pausedTime: 0,
   score: 0,
+  nameOfTheSongs: [],
 
   actions: {
     inc: () => set((state) => ({ count: state.count + 1 })),
@@ -59,6 +60,12 @@ export const useStore = create((set, get) => ({
         return {
           score: state.score + score,
         };
+      }),
+    setNameOfTheSongs: (songs) =>
+      set(() => {
+        const objFilteredByKind = songs.filter((song) => song.kind === 'song');
+        const songNames = objFilteredByKind.map((song) => song.trackName);
+        return { nameOfTheSongs: songNames };
       }),
   },
 }));
