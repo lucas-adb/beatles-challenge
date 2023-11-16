@@ -7,7 +7,8 @@ import CustomAudioPlayer from './components/CustomAudioPlayer';
 import GuessForm from './components/GuessForm';
 
 function App() {
-  const { songsByAlbum, sortedNumber, score, actions } = useStore();
+  const { songsByAlbum, sortedNumber, score, playedTracksId, actions } =
+    useStore();
   const { setSongsByAlbum, sortNumber } = actions;
 
   useEffect(() => {
@@ -39,6 +40,7 @@ function App() {
           <p>total of tracks: {songsByAlbum?.length}</p>
           <p>sorted number: {sortedNumber}</p>
           <p>Score: {score} </p>
+          <p>Number of correct guesses: {playedTracksId.length} </p>
         </div>
 
         <CustomAudioPlayer />
