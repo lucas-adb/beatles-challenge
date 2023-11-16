@@ -38,6 +38,7 @@ export const useStore = create((set, get) => ({
         };
       }),
     saveAnswer: (eventTargetValue) => set(() => ({ answer: eventTargetValue })),
+    eraseAnswer: () => set(() => ({ answer: '' })),
     savePlayedTracksId: () =>
       set((state) => {
         const { songsByAlbum, sortedNumber } = get();

@@ -3,7 +3,8 @@ import { useStore } from '../store/GameStore';
 export default function GuessForm() {
   const { songsByAlbum, answer, playedTracksId, sortedNumber, actions } =
     useStore();
-  const { savePlayedTracksId, sortNumber, saveAnswer, setScore } = actions;
+  const { savePlayedTracksId, sortNumber, saveAnswer, setScore, eraseAnswer } =
+    actions;
 
   const checkAnswer = () => {
     if (answer !== songsByAlbum[sortedNumber].trackName) {
@@ -22,8 +23,8 @@ export default function GuessForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     checkAnswer();
+    eraseAnswer();
   };
 
   return (
