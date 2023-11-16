@@ -3,7 +3,7 @@ import { useStore } from '../store/GameStore';
 export default function GuessForm() {
   const { songsByAlbum, answer, playedTracksId, sortedNumber, actions } =
     useStore();
-  const { savePlayedTracksId, sortNumber, saveAnswer } = actions;
+  const { savePlayedTracksId, sortNumber, saveAnswer, setScore } = actions;
 
   const checkAnswer = () => {
     if (answer !== songsByAlbum[sortedNumber].trackName) {
@@ -11,10 +11,12 @@ export default function GuessForm() {
     } else if (playedTracksId.length >= songsByAlbum.length - 1) {
       alert('Wow, you guessed 100% of the songs. Amazing!');
       savePlayedTracksId();
+      setScore();
     } else {
       alert("That's Right!");
       savePlayedTracksId();
       sortNumber();
+      setScore();
     }
   };
 

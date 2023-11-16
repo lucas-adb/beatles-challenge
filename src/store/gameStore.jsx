@@ -10,6 +10,7 @@ export const useStore = create((set, get) => ({
   playedTracksId: [],
   duration: 0,
   pausedTime: 0,
+  score: 0,
 
   actions: {
     inc: () => set((state) => ({ count: state.count + 1 })),
@@ -49,5 +50,10 @@ export const useStore = create((set, get) => ({
       }),
     setPausedTime: (currentTime) => set(() => ({ pausedTime: currentTime })),
     setDuration: (duration) => set(() => ({ duration })),
+    setScore: () =>
+      set((state) => {
+        const { duration, pausedTime } = get();
+        return { score: state.score + (duration - pausedTime) };
+      }),
   },
 }));
