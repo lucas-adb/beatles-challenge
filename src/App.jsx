@@ -1,4 +1,5 @@
 import './App.css';
+import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { useStore } from './store/gameStore';
 import { getSongsFromAlbum } from './services/fetchItunes';
@@ -8,6 +9,9 @@ function App() {
     useStore();
   const { setSongsByAlbum, sortNumber, saveAnswer, savePlayedTracksId } =
     actions;
+
+  const [duration, setDuration] = useState(0);
+  const [pausedTime, setPausedTime] = useState(0);
 
   useEffect(() => {
     let ignore = false;
@@ -52,6 +56,19 @@ function App() {
 
   console.log('playedTracksId', playedTracksId);
 
+  // AUDIO CUSTOMIZATION
+
+  const audioRef = useRef();
+
+  const togglePlayPause = () => {
+    const audio = audioRef.current;
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  };
+
   return (
     <>
       <div>
@@ -62,11 +79,23 @@ function App() {
           <p>sorted number: {sortedNumber}</p>
         </div>
 
-        <audio
+        {/* <audio
+          onPause={(e) => setPausedTime(e.target.currentTime)}
+          onLoadedMetadata={(e) => setDuration(e.target.duration)}
           sandbox="allow-same-origin"
           controls
           src={songsByAlbum[sortedNumber]?.previewUrl}
+        ></audio> */}
+
+        <audio
+          ref={audioRef}
+          onPause={(e) => setPausedTime(e.target.currentTime)}
+          onLoadedMetadata={(e) => setDuration(e.target.duration)}
+          sandbox="allow-same-origin"
+          src={songsByAlbum[sortedNumber]?.previewUrl}
         ></audio>
+
+        <button onClick={togglePlayPause}>Play/Pause</button>
 
         <form onSubmit={handleSubmit}>
           <input
