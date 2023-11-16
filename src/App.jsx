@@ -6,6 +6,11 @@ import { getSongsFromAlbum } from './services/fetchItunes';
 import CustomAudioPlayer from './components/CustomAudioPlayer';
 import GuessForm from './components/GuessForm';
 
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 function App() {
   const { songsByAlbum, sortedNumber, score, playedTracksId, actions } =
     useStore();
