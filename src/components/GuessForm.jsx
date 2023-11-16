@@ -5,8 +5,7 @@ import ComboBox from './ComboBox';
 export default function GuessForm() {
   const { songsByAlbum, answer, playedTracksId, sortedNumber, actions } =
     useStore();
-  const { savePlayedTracksId, sortNumber, saveAnswer, setScore, eraseAnswer } =
-    actions;
+  const { savePlayedTracksId, sortNumber, setScore, eraseAnswer } = actions;
 
   const checkAnswer = () => {
     if (answer !== songsByAlbum[sortedNumber].trackName) {
@@ -29,13 +28,11 @@ export default function GuessForm() {
     eraseAnswer();
   };
 
+  console.log('answer', answer);
+
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={answer}
-        onChange={(e) => saveAnswer(e.target.value)}
-      />
+      <ComboBox />
 
       <Button
         type="submit"
@@ -43,8 +40,6 @@ export default function GuessForm() {
       >
         Answer
       </Button>
-
-      <ComboBox />
     </form>
   );
 }
