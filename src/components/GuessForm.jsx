@@ -24,10 +24,6 @@ export default function GuessForm() {
   const checkAnswer = () => {
     if (answer !== songsByAlbum[sortedNumber].trackName) {
       setIsAnswerCorrectAsFalse();
-    } else if (playedTracksId.length >= songsByAlbum.length - 1) {
-      setIsAnswerCorrectAsTrue();
-      savePlayedTracksId();
-      setScore();
     } else {
       setIsAnswerCorrectAsTrue();
       savePlayedTracksId();
