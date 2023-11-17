@@ -46,7 +46,3 @@ export default function CustomAudioPlayer() {
     </>
   );
 }
-
-{
-  /* <button onClick={togglePlayPause}>Play/Pause</button> */
-}

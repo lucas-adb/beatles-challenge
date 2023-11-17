@@ -25,6 +25,8 @@ function App() {
     setNameOfTheSongs,
     setIsAnswerCorrect,
     setPausedTime,
+    setScoreToZero,
+    resetPlayedTracksId,
   } = actions;
 
   useEffect(() => {
@@ -63,6 +65,15 @@ function App() {
     return true;
   };
 
+  const tryAgain = () => {
+    // reset score and guesses
+    setScoreToZero();
+    resetPlayedTracksId();
+    sortNumber();
+    setIsAnswerCorrect();
+    setPausedTime();
+  };
+
   return (
     <Container maxWidth="sm">
       <Box
@@ -84,14 +95,12 @@ function App() {
 
         {!isAnswerCorrect && isAnswerCorrect !== null && (
           <Box sx={{ color: 'error.main' }}>
-            {/* <h2>Wrong! ❌</h2> */}
             <Zoom in={true}>{<h2>Wrong! ❌</h2>}</Zoom>
           </Box>
         )}
 
         {isAnswerCorrect && (
           <Box sx={{ color: 'success.main' }}>
-            {/* <h2>Correct! ✅</h2> */}
             <Zoom in={true}>{<h2>Correct! ✅</h2>}</Zoom>
           </Box>
         )}
@@ -105,44 +114,23 @@ function App() {
             type="submit"
             disabled={isNextButtonDisable()}
             variant="contained"
-            sx={{ width: '100%' }}
+            // sx={{ width: '100%' }}
             onClick={goToNextSong}
           >
             Next
           </Button>
         )}
 
-        {/* <Button
-          type="submit"
-          disabled={isNextButtonDisable()}
-          variant="contained"
-          sx={{ width: '100%' }}
-          onClick={goToNextSong}
-        >
-          Next
-        </Button> */}
-
         {!isAnswerCorrect && isAnswerCorrect !== null && (
-          <>
-            <Button
-              type="submit"
-              disabled={!(!isAnswerCorrect && isAnswerCorrect !== null)}
-              variant="contained"
-              // sx={{ width: '100%' }}
-              // onClick={}
-            >
-              Try Again
-            </Button>
-            {/* <Button
-              type="submit"
-              // disabled={}
-              variant="contained"
-              // sx={{ width: '100%' }}
-              // onClick={}
-            >
-              Quit
-            </Button> */}
-          </>
+          <Button
+            type="submit"
+            disabled={!(!isAnswerCorrect && isAnswerCorrect !== null)}
+            variant="contained"
+            // sx={{ width: '100%' }}
+            onClick={tryAgain}
+          >
+            Try Again
+          </Button>
         )}
       </Box>
     </Container>

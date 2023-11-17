@@ -51,6 +51,7 @@ export const useStore = create((set, get) => ({
           ],
         };
       }),
+    resetPlayedTracksId: () => set(() => ({ playedTracksId: [] })),
     setPausedTime: (currentTime = 0) =>
       set(() => ({ pausedTime: currentTime })),
     setDuration: (duration) => set(() => ({ duration })),
@@ -63,6 +64,7 @@ export const useStore = create((set, get) => ({
           score: state.score + score,
         };
       }),
+    setScoreToZero: () => set(() => ({ score: 0 })),
     setNameOfTheSongs: (songs) =>
       set(() => {
         const objFilteredByKind = songs.filter((song) => song.kind === 'song');
