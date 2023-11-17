@@ -27,6 +27,7 @@ function App() {
     setPausedTime,
     setScoreToZero,
     resetPlayedTracksId,
+    setIsClickedPlayBtn,
   } = actions;
 
   useEffect(() => {
@@ -57,6 +58,7 @@ function App() {
     sortNumber();
     setIsAnswerCorrect();
     setPausedTime();
+    setIsClickedPlayBtn(false);
   };
 
   const isNextButtonDisable = () => {
@@ -66,12 +68,12 @@ function App() {
   };
 
   const restartGame = () => {
-    // reset score and guesses
     setScoreToZero();
     resetPlayedTracksId();
     sortNumber();
     setIsAnswerCorrect();
     setPausedTime();
+    setIsClickedPlayBtn(false);
   };
 
   return (

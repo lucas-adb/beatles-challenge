@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useStore } from '../store/GameStore';
 import IconButton from '@mui/material/IconButton';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
@@ -7,14 +7,12 @@ import StopCircleIcon from '@mui/icons-material/StopCircle';
 export default function CustomAudioPlayer() {
   const audioRef = useRef();
 
-  const { songsByAlbum, sortedNumber, actions } = useStore();
-  const { setDuration, setPausedTime } = actions;
-
-  const [clicked, setClicked] = useState(false);
+  const { songsByAlbum, sortedNumber, isPlayBtnClicked, actions } = useStore();
+  const { setDuration, setPausedTime, setIsClickedPlayBtn } = actions;
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
-    setClicked(!clicked);
+    setIsClickedPlayBtn(!isPlayBtnClicked);
     if (audio.paused) {
       audio.play();
     } else {
@@ -37,7 +35,7 @@ export default function CustomAudioPlayer() {
         sx={{ width: 140, margin: '0 auto' }}
         onClick={togglePlayPause}
       >
-        {clicked ? (
+        {isPlayBtnClicked ? (
           <StopCircleIcon fontSize="large" sx={{ fontSize: 140 }} />
         ) : (
           <PlayCircleFilledIcon sx={{ fontSize: 140 }} />

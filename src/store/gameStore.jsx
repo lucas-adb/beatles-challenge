@@ -13,6 +13,7 @@ export const useStore = create((set, get) => ({
   score: 0,
   nameOfTheSongs: [],
   isAnswerCorrect: null,
+  isPlayBtnClicked: false,
 
   actions: {
     inc: () => set((state) => ({ count: state.count + 1 })),
@@ -73,5 +74,7 @@ export const useStore = create((set, get) => ({
       }),
     setIsAnswerCorrect: (boolean = null) =>
       set(() => ({ isAnswerCorrect: boolean })),
+    setIsClickedPlayBtn: (boolean) =>
+      set(() => ({ isPlayBtnClicked: boolean })),
   },
 }));
