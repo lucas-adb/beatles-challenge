@@ -6,6 +6,7 @@ import { getSongsFromAlbum } from './services/fetchItunes';
 import CustomAudioPlayer from './components/CustomAudioPlayer';
 import GuessForm from './components/GuessForm';
 import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 function App() {
   const {
@@ -39,18 +40,19 @@ function App() {
     };
   }, [setSongsByAlbum, sortNumber, setNameOfTheSongs]);
 
+  console.log('answer', songsByAlbum[sortedNumber]?.trackName);
+  console.log('total of tracks', songsByAlbum?.length);
+
   return (
     <Container maxWidth="sm">
       <>
         <div>
-          <h1>Beatles Challenge</h1>
-          <div>
-            <p>Answer: {songsByAlbum[sortedNumber]?.trackName}</p>
-            <p>Total of tracks: {songsByAlbum?.length}</p>
-            <p>Sorted number: {sortedNumber}</p>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <p>Score: {score} </p>
-            <p>Correct guesses: {playedTracksId.length} </p>
-          </div>
+            <p>Guesses: {playedTracksId.length} </p>
+          </Box>
+
+          <h1>Beatles Challenge</h1>
 
           {isAnswerCorrect !== null && (
             <div>{isAnswerCorrect ? 'Correct!' : 'Wrong!'}</div>
