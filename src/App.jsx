@@ -100,7 +100,19 @@ function App() {
 
         <GuessForm />
 
-        <Button
+        {!(!isAnswerCorrect && isAnswerCorrect !== null) && (
+          <Button
+            type="submit"
+            disabled={isNextButtonDisable()}
+            variant="contained"
+            sx={{ width: '100%' }}
+            onClick={goToNextSong}
+          >
+            Next
+          </Button>
+        )}
+
+        {/* <Button
           type="submit"
           disabled={isNextButtonDisable()}
           variant="contained"
@@ -108,7 +120,30 @@ function App() {
           onClick={goToNextSong}
         >
           Next
-        </Button>
+        </Button> */}
+
+        {!isAnswerCorrect && isAnswerCorrect !== null && (
+          <>
+            <Button
+              type="submit"
+              disabled={!(!isAnswerCorrect && isAnswerCorrect !== null)}
+              variant="contained"
+              // sx={{ width: '100%' }}
+              // onClick={}
+            >
+              Try Again
+            </Button>
+            {/* <Button
+              type="submit"
+              // disabled={}
+              variant="contained"
+              // sx={{ width: '100%' }}
+              // onClick={}
+            >
+              Quit
+            </Button> */}
+          </>
+        )}
       </Box>
     </Container>
   );
