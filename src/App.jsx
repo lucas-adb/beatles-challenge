@@ -19,7 +19,12 @@ function App() {
     isAnswerCorrect,
     actions,
   } = useStore();
-  const { setSongsByAlbum, sortNumber, setNameOfTheSongs } = actions;
+  const {
+    setSongsByAlbum,
+    sortNumber,
+    setNameOfTheSongs,
+    setIsAnswerCorrectAsNull,
+  } = actions;
 
   useEffect(() => {
     let ignore = false;
@@ -42,8 +47,19 @@ function App() {
     };
   }, [setSongsByAlbum, sortNumber, setNameOfTheSongs]);
 
-  console.log('answer', songsByAlbum[sortedNumber]?.trackName);
+  console.log('right answer', songsByAlbum[sortedNumber]?.trackName);
   console.log('total of tracks', songsByAlbum?.length);
+
+  const goToNextSong = () => {
+    sortNumber();
+    setIsAnswerCorrectAsNull();
+  };
+
+  const isNextButtonDisable = () => {
+    if (isAnswerCorrect) return false;
+    if (playedTracksId.length >= songsByAlbum.length) return true;
+    return true;
+  };
 
   return (
     <Container maxWidth="sm">
@@ -84,9 +100,10 @@ function App() {
 
         <Button
           type="submit"
-          disabled={playedTracksId.length >= songsByAlbum.length}
+          disabled={isNextButtonDisable()}
           variant="contained"
           sx={{ width: '100%' }}
+          onClick={goToNextSong}
         >
           Next
         </Button>

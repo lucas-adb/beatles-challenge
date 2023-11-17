@@ -71,5 +71,6 @@ export const useStore = create((set, get) => ({
       }),
     setIsAnswerCorrectAsTrue: () => set(() => ({ isAnswerCorrect: true })),
     setIsAnswerCorrectAsFalse: () => set(() => ({ isAnswerCorrect: false })),
+    setIsAnswerCorrectAsNull: () => set(() => ({ isAnswerCorrect: null })),
   },
 }));
