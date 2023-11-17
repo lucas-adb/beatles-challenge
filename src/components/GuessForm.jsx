@@ -11,21 +11,14 @@ export default function GuessForm() {
     pausedTime,
     actions,
   } = useStore();
-  const {
-    savePlayedTracksId,
-    sortNumber,
-    setScore,
-    eraseAnswer,
-    setIsAnswerCorrectAsFalse,
-    setIsAnswerCorrectAsTrue,
-    setPausedTime,
-  } = actions;
+  const { savePlayedTracksId, setScore, eraseAnswer, setIsAnswerCorrect } =
+    actions;
 
   const checkAnswer = () => {
     if (answer !== songsByAlbum[sortedNumber].trackName) {
-      setIsAnswerCorrectAsFalse();
+      setIsAnswerCorrect(false);
     } else {
-      setIsAnswerCorrectAsTrue();
+      setIsAnswerCorrect(true);
       savePlayedTracksId();
       setScore();
     }
@@ -35,7 +28,6 @@ export default function GuessForm() {
     event.preventDefault();
     checkAnswer();
     eraseAnswer();
-    setPausedTime();
   };
 
   const isAnswerButtonDisable = () => {

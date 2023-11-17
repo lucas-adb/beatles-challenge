@@ -23,7 +23,8 @@ function App() {
     setSongsByAlbum,
     sortNumber,
     setNameOfTheSongs,
-    setIsAnswerCorrectAsNull,
+    setIsAnswerCorrect,
+    setPausedTime,
   } = actions;
 
   useEffect(() => {
@@ -52,7 +53,8 @@ function App() {
 
   const goToNextSong = () => {
     sortNumber();
-    setIsAnswerCorrectAsNull();
+    setIsAnswerCorrect();
+    setPausedTime();
   };
 
   const isNextButtonDisable = () => {

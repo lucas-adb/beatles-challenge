@@ -69,8 +69,7 @@ export const useStore = create((set, get) => ({
         const songNames = objFilteredByKind.map((song) => song.trackName);
         return { nameOfTheSongs: songNames };
       }),
-    setIsAnswerCorrectAsTrue: () => set(() => ({ isAnswerCorrect: true })),
-    setIsAnswerCorrectAsFalse: () => set(() => ({ isAnswerCorrect: false })),
-    setIsAnswerCorrectAsNull: () => set(() => ({ isAnswerCorrect: null })),
+    setIsAnswerCorrect: (boolean = null) =>
+      set(() => ({ isAnswerCorrect: boolean })),
   },
 }));
