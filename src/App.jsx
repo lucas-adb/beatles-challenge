@@ -65,7 +65,7 @@ function App() {
     return true;
   };
 
-  const tryAgain = () => {
+  const restartGame = () => {
     // reset score and guesses
     setScoreToZero();
     resetPlayedTracksId();
@@ -127,9 +127,9 @@ function App() {
             disabled={!(!isAnswerCorrect && isAnswerCorrect !== null)}
             variant="contained"
             // sx={{ width: '100%' }}
-            onClick={tryAgain}
+            onClick={restartGame}
           >
-            Try Again
+            Restart
           </Button>
         )}
       </Box>
