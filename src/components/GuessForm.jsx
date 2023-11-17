@@ -3,8 +3,14 @@ import Button from '@mui/material/Button';
 import ComboBox from './ComboBox';
 
 export default function GuessForm() {
-  const { songsByAlbum, answer, playedTracksId, sortedNumber, actions } =
-    useStore();
+  const {
+    songsByAlbum,
+    answer,
+    playedTracksId,
+    sortedNumber,
+    pausedTime,
+    actions,
+  } = useStore();
   const {
     savePlayedTracksId,
     sortNumber,
@@ -12,6 +18,7 @@ export default function GuessForm() {
     eraseAnswer,
     setIsAnswerCorrectAsFalse,
     setIsAnswerCorrectAsTrue,
+    setPausedTime,
   } = actions;
 
   const checkAnswer = () => {
@@ -33,9 +40,17 @@ export default function GuessForm() {
     event.preventDefault();
     checkAnswer();
     eraseAnswer();
+    setPausedTime();
+  };
+
+  const isAnswerButtonDisable = () => {
+    if (answer && pausedTime > 0) return false;
+    if (playedTracksId.length >= songsByAlbum.length) return true;
+    return true;
   };
 
   console.log('answer', answer);
+  console.log('pausedTime', pausedTime);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -43,8 +58,9 @@ export default function GuessForm() {
 
       <Button
         type="submit"
-        disabled={playedTracksId.length >= songsByAlbum.length}
+        disabled={isAnswerButtonDisable()}
         variant="contained"
+        sx={{ width: '100%' }}
       >
         Answer
       </Button>

@@ -51,7 +51,8 @@ export const useStore = create((set, get) => ({
           ],
         };
       }),
-    setPausedTime: (currentTime) => set(() => ({ pausedTime: currentTime })),
+    setPausedTime: (currentTime = 0) =>
+      set(() => ({ pausedTime: currentTime })),
     setDuration: (duration) => set(() => ({ duration })),
     setScore: () =>
       set((state) => {

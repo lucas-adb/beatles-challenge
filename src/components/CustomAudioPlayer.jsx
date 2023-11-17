@@ -32,11 +32,15 @@ export default function CustomAudioPlayer() {
         src={songsByAlbum[sortedNumber]?.previewUrl}
       ></audio>
 
-      <IconButton aria-label="delete" onClick={togglePlayPause}>
+      <IconButton
+        aria-label="play-stop"
+        sx={{ width: 140, margin: '0 auto' }}
+        onClick={togglePlayPause}
+      >
         {clicked ? (
-          <StopCircleIcon fontSize="large" />
+          <StopCircleIcon fontSize="large" sx={{ fontSize: 140 }} />
         ) : (
-          <PlayCircleFilledIcon fontSize="large" />
+          <PlayCircleFilledIcon sx={{ fontSize: 140 }} />
         )}
       </IconButton>
     </>

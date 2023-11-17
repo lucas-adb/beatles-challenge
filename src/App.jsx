@@ -7,6 +7,8 @@ import CustomAudioPlayer from './components/CustomAudioPlayer';
 import GuessForm from './components/GuessForm';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import { Button } from '@mui/material';
+import Zoom from '@mui/material/Zoom';
 
 function App() {
   const {
@@ -45,24 +47,50 @@ function App() {
 
   return (
     <Container maxWidth="sm">
-      <>
-        <div>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <p>Score: {score} </p>
-            <p>Guesses: {playedTracksId.length} </p>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+          textAlign: 'center',
+        }}
+      >
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <p>Score: {score} </p>
+          <p>Guesses: {playedTracksId.length} </p>
+        </Box>
+
+        <h1>Beatles Guessing Challenge</h1>
+
+        {/* To-do: create a component to show feedback of answer */}
+
+        {!isAnswerCorrect && isAnswerCorrect !== null && (
+          <Box sx={{ color: 'error.main' }}>
+            {/* <h2>Wrong! ❌</h2> */}
+            <Zoom in={true}>{<h2>Wrong! ❌</h2>}</Zoom>
           </Box>
+        )}
 
-          <h1>Beatles Challenge</h1>
+        {isAnswerCorrect && (
+          <Box sx={{ color: 'success.main' }}>
+            {/* <h2>Correct! ✅</h2> */}
+            <Zoom in={true}>{<h2>Correct! ✅</h2>}</Zoom>
+          </Box>
+        )}
 
-          {isAnswerCorrect !== null && (
-            <div>{isAnswerCorrect ? 'Correct!' : 'Wrong!'}</div>
-          )}
+        <CustomAudioPlayer />
 
-          <CustomAudioPlayer />
+        <GuessForm />
 
-          <GuessForm />
-        </div>
-      </>
+        <Button
+          type="submit"
+          disabled={playedTracksId.length >= songsByAlbum.length}
+          variant="contained"
+          sx={{ width: '100%' }}
+        >
+          Next
+        </Button>
+      </Box>
     </Container>
   );
 }

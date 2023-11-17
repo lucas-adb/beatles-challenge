@@ -12,7 +12,8 @@ export default function ComboBox() {
       disablePortal
       id="combo-box-demo"
       options={nameOfTheSongs}
-      sx={{ width: 300 }}
+      // sx={{ width: 300 }}
+      sx={{ marginBottom: 2 }}
       renderInput={(params) => <TextField {...params} label="Songs" />}
       // value={}
       onChange={(event, newValue) => {
