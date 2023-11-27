@@ -13,7 +13,6 @@ export default function ComboBox() {
       disabled={isComboBoxDisabled}
       id="combo-box-demo"
       options={nameOfTheSongs}
-      // sx={{ width: 300 }}
       isOptionEqualToValue={(option, value) => option === value || value === ''}
       sx={{ marginBottom: 2 }}
       renderInput={(params) => <TextField {...params} label="Songs" />}
@@ -21,10 +20,6 @@ export default function ComboBox() {
       onChange={(event, newValue) => {
         saveAnswer(newValue);
       }}
-      // inputValue={answer}
-      // onInputChange={(event, newInputValue) => {
-      //   saveAnswer(newInputValue);
-      // }}
     />
   );
 }

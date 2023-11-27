@@ -26,7 +26,6 @@ export default function GuessForm() {
       setIsAnswerCorrect(true);
       savePlayedTracksId();
       setScore();
-      // setIsComboBoxDisabled();
     }
   };
 

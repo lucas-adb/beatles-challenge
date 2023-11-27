@@ -61,7 +61,6 @@ function App() {
     setIsAnswerCorrect();
     setPausedTime();
     setIsClickedPlayBtn(false);
-    // setIsComboBoxDisabled();
   };
 
   const isNextButtonDisable = () => {
@@ -132,7 +131,6 @@ function App() {
             type="submit"
             disabled={!(!isAnswerCorrect && isAnswerCorrect !== null)}
             variant="contained"
-            // sx={{ width: '100%' }}
             onClick={restartGame}
           >
             Restart
