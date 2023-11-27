@@ -14,6 +14,7 @@ export const useStore = create((set, get) => ({
   nameOfTheSongs: [],
   isAnswerCorrect: null,
   isPlayBtnClicked: false,
+  isComboBoxDisabled: false,
 
   actions: {
     inc: () => set((state) => ({ count: state.count + 1 })),
@@ -76,5 +77,9 @@ export const useStore = create((set, get) => ({
       set(() => ({ isAnswerCorrect: boolean })),
     setIsClickedPlayBtn: (boolean) =>
       set(() => ({ isPlayBtnClicked: boolean })),
+    setIsComboBoxDisabled: () => {
+      const { isComboBoxDisabled } = get();
+      set(() => ({ isComboBoxDisabled: !isComboBoxDisabled }));
+    },
   },
 }));

@@ -28,6 +28,7 @@ function App() {
     setScoreToZero,
     resetPlayedTracksId,
     setIsClickedPlayBtn,
+    setIsComboBoxDisabled,
   } = actions;
 
   useEffect(() => {
@@ -55,10 +56,12 @@ function App() {
   console.log('total of tracks', songsByAlbum?.length);
 
   const goToNextSong = () => {
+    setIsComboBoxDisabled();
     sortNumber();
     setIsAnswerCorrect();
     setPausedTime();
     setIsClickedPlayBtn(false);
+    // setIsComboBoxDisabled();
   };
 
   const isNextButtonDisable = () => {
@@ -74,6 +77,7 @@ function App() {
     setIsAnswerCorrect();
     setPausedTime();
     setIsClickedPlayBtn(false);
+    setIsComboBoxDisabled();
   };
 
   return (

@@ -4,12 +4,13 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useStore } from '../store/GameStore';
 
 export default function ComboBox() {
-  const { nameOfTheSongs, answer, actions } = useStore();
+  const { nameOfTheSongs, answer, isComboBoxDisabled, actions } = useStore();
   const { saveAnswer } = actions;
 
   return (
     <Autocomplete
       disablePortal
+      disabled={isComboBoxDisabled}
       id="combo-box-demo"
       options={nameOfTheSongs}
       // sx={{ width: 300 }}
