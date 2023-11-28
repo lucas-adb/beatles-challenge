@@ -1,5 +1,4 @@
 import './App.css';
-// import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { useStore } from './store/gameStore';
 import { getSongsFromAlbum } from './services/fetchItunes';
@@ -7,30 +6,14 @@ import CustomAudioPlayer from './components/CustomAudioPlayer';
 import GuessForm from './components/GuessForm';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import { Button } from '@mui/material';
 import ShowAnswer from './components/ShowAnswer';
 import NextBtn from './components/NextBtn';
+import RestartBtn from './components/RestartBtn';
 
 function App() {
-  const {
-    songsByAlbum,
-    sortedNumber,
-    score,
-    playedTracksId,
-    isAnswerCorrect,
-    actions,
-  } = useStore();
-  const {
-    setSongsByAlbum,
-    sortNumber,
-    setNameOfTheSongs,
-    setIsAnswerCorrect,
-    setPausedTime,
-    setScoreToZero,
-    resetPlayedTracksId,
-    setIsClickedPlayBtn,
-    setIsComboBoxDisabled,
-  } = actions;
+  const { songsByAlbum, sortedNumber, score, playedTracksId, actions } =
+    useStore();
+  const { setSongsByAlbum, sortNumber, setNameOfTheSongs } = actions;
 
   useEffect(() => {
     let ignore = false;
@@ -55,16 +38,6 @@ function App() {
 
   console.log('right answer', songsByAlbum[sortedNumber]?.trackName);
   console.log('total of tracks', songsByAlbum?.length);
-
-  const restartGame = () => {
-    setScoreToZero();
-    resetPlayedTracksId();
-    sortNumber();
-    setIsAnswerCorrect();
-    setPausedTime();
-    setIsClickedPlayBtn(false);
-    setIsComboBoxDisabled();
-  };
 
   return (
     <Container maxWidth="sm">
@@ -91,16 +64,7 @@ function App() {
 
         <NextBtn />
 
-        {!isAnswerCorrect && isAnswerCorrect !== null && (
-          <Button
-            type="submit"
-            disabled={!(!isAnswerCorrect && isAnswerCorrect !== null)}
-            variant="contained"
-            onClick={restartGame}
-          >
-            Restart
-          </Button>
-        )}
+        <RestartBtn />
       </Box>
     </Container>
   );
