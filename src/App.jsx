@@ -1,15 +1,15 @@
 import './App.css';
 // import { useRef, useState } from 'react';
 import { useEffect } from 'react';
-import { useStore } from './store/GameStore';
+import { useStore } from './store/gameStore';
 import { getSongsFromAlbum } from './services/fetchItunes';
 import CustomAudioPlayer from './components/CustomAudioPlayer';
 import GuessForm from './components/GuessForm';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
-import Zoom from '@mui/material/Zoom';
 import ShowAnswer from './components/ShowAnswer';
+import NextBtn from './components/NextBtn';
 
 function App() {
   const {
@@ -56,20 +56,6 @@ function App() {
   console.log('right answer', songsByAlbum[sortedNumber]?.trackName);
   console.log('total of tracks', songsByAlbum?.length);
 
-  const goToNextSong = () => {
-    setIsComboBoxDisabled();
-    sortNumber();
-    setIsAnswerCorrect();
-    setPausedTime();
-    setIsClickedPlayBtn(false);
-  };
-
-  const isNextButtonDisable = () => {
-    if (isAnswerCorrect) return false;
-    if (playedTracksId.length >= songsByAlbum.length) return true;
-    return true;
-  };
-
   const restartGame = () => {
     setScoreToZero();
     resetPlayedTracksId();
@@ -97,37 +83,13 @@ function App() {
 
         <h1>Beatles Guessing Challenge</h1>
 
-        {/* To-do: create a component to show feedback of answer */}
-
-        {/* {!isAnswerCorrect && isAnswerCorrect !== null && (
-          <Box sx={{ color: 'error.main' }}>
-            <Zoom in={true}>{<h2>Wrong! ❌</h2>}</Zoom>
-          </Box>
-        )}
-
-        {isAnswerCorrect && (
-          <Box sx={{ color: 'success.main' }}>
-            <Zoom in={true}>{<h2>Correct! ✅</h2>}</Zoom>
-          </Box>
-        )} */}
-
         <ShowAnswer />
 
         <CustomAudioPlayer />
 
         <GuessForm />
 
-        {!(!isAnswerCorrect && isAnswerCorrect !== null) && (
-          <Button
-            type="submit"
-            disabled={isNextButtonDisable()}
-            variant="contained"
-            // sx={{ width: '100%' }}
-            onClick={goToNextSong}
-          >
-            Next
-          </Button>
-        )}
+        <NextBtn />
 
         {!isAnswerCorrect && isAnswerCorrect !== null && (
           <Button
