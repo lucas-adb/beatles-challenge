@@ -9,6 +9,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import Zoom from '@mui/material/Zoom';
+import ShowAnswer from './components/ShowAnswer';
 
 function App() {
   const {
@@ -98,7 +99,7 @@ function App() {
 
         {/* To-do: create a component to show feedback of answer */}
 
-        {!isAnswerCorrect && isAnswerCorrect !== null && (
+        {/* {!isAnswerCorrect && isAnswerCorrect !== null && (
           <Box sx={{ color: 'error.main' }}>
             <Zoom in={true}>{<h2>Wrong! ❌</h2>}</Zoom>
           </Box>
@@ -108,7 +109,9 @@ function App() {
           <Box sx={{ color: 'success.main' }}>
             <Zoom in={true}>{<h2>Correct! ✅</h2>}</Zoom>
           </Box>
-        )}
+        )} */}
+
+        <ShowAnswer />
 
         <CustomAudioPlayer />
 
