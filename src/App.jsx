@@ -9,10 +9,10 @@ import Box from '@mui/material/Box';
 import ShowAnswer from './components/ShowAnswer';
 import NextBtn from './components/NextBtn';
 import RestartBtn from './components/RestartBtn';
+import BoxScore from './components/BoxScore';
 
 function App() {
-  const { songsByAlbum, sortedNumber, score, playedTracksId, actions } =
-    useStore();
+  const { songsByAlbum, sortedNumber, actions } = useStore();
   const { setSongsByAlbum, sortNumber, setNameOfTheSongs } = actions;
 
   useEffect(() => {
@@ -49,12 +49,7 @@ function App() {
           textAlign: 'center',
         }}
       >
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <p>Score: {score} </p>
-          <p>Guesses: {playedTracksId.length} </p>
-        </Box>
-
-        <h1>Beatles Guessing Challenge</h1>
+        <BoxScore />
 
         <ShowAnswer />
 
