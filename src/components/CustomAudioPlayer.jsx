@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useStore } from '../store/GameStore';
 import IconButton from '@mui/material/IconButton';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
@@ -10,15 +10,29 @@ export default function CustomAudioPlayer() {
   const { songsByAlbum, sortedNumber, isPlayBtnClicked, actions } = useStore();
   const { setDuration, setPausedTime, setIsPlayBtnClicked } = actions;
 
-  const togglePlayPause = () => {
+  const togglePlayPause = useCallback(() => {
     const audio = audioRef.current;
-    setIsPlayBtnClicked(!isPlayBtnClicked);
+    setIsPlayBtnClicked((prevIsPlayBtnClicked) => !prevIsPlayBtnClicked);
     if (audio.paused) {
       audio.play();
     } else {
       audio.pause();
     }
-  };
+  }, [setIsPlayBtnClicked]);
+
+  useEffect(() => {
+    const handleSpacebarPress = (event) => {
+      if (event.code === 'Space') {
+        togglePlayPause();
+      }
+    };
+
+    window.addEventListener('keydown', handleSpacebarPress);
+
+    return () => {
+      window.removeEventListener('keydown', handleSpacebarPress);
+    };
+  }, [togglePlayPause]);
 
   return (
     <>
