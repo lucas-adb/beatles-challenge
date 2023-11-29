@@ -3,7 +3,6 @@ import { getRandomIntInclusive } from '../utils/getRandomIntInclusive';
 import { excludeUsedRandomNumber } from '../utils/excludeUsedRandomNumber';
 
 export const useStore = create((set, get) => ({
-  count: 1,
   songsByAlbum: [],
   sortedNumber: null,
   answer: '',
@@ -17,13 +16,12 @@ export const useStore = create((set, get) => ({
   isComboBoxDisabled: false,
 
   actions: {
-    inc: () => set((state) => ({ count: state.count + 1 })),
     setSongsByAlbum: (songs) =>
       set(() => {
         const objFilteredByKind = songs.filter((song) => song.kind === 'song');
         return { songsByAlbum: objFilteredByKind };
       }),
-    sortNumber: () =>
+    setSortedNumber: () =>
       set(() => {
         const { songsByAlbum, playedTracksId, sortedNumber } = get();
 
@@ -41,9 +39,9 @@ export const useStore = create((set, get) => ({
           sortedNumber: getRandomIntInclusive(0, songsByAlbum.length - 1),
         };
       }),
-    saveAnswer: (eventTargetValue) => set(() => ({ answer: eventTargetValue })),
+    setAnswer: (eventTargetValue) => set(() => ({ answer: eventTargetValue })),
     eraseAnswer: () => set(() => ({ answer: '' })),
-    savePlayedTracksId: () =>
+    setPlayedTracksId: () =>
       set((state) => {
         const { songsByAlbum, sortedNumber } = get();
         return {
@@ -75,7 +73,7 @@ export const useStore = create((set, get) => ({
       }),
     setIsAnswerCorrect: (boolean = null) =>
       set(() => ({ isAnswerCorrect: boolean })),
-    setIsClickedPlayBtn: (boolean) =>
+    setIsPlayBtnClicked: (boolean) =>
       set(() => ({ isPlayBtnClicked: boolean })),
     setIsComboBoxDisabled: () => {
       const { isComboBoxDisabled } = get();

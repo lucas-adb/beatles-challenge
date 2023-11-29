@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useStore } from '../store/gameStore';
+import { useStore } from '../store/GameStore';
 import { getSongsFromAlbum } from '../services/fetchItunes';
 import CustomAudioPlayer from '../components/CustomAudioPlayer';
 import GuessForm from '../components/GuessForm';
@@ -12,7 +12,7 @@ import BoxScore from '../components/BoxScore';
 
 function Game() {
   const { songsByAlbum, sortedNumber, actions } = useStore();
-  const { setSongsByAlbum, sortNumber, setNameOfTheSongs } = actions;
+  const { setSongsByAlbum, setSortedNumber, setNameOfTheSongs } = actions;
 
   useEffect(() => {
     let ignore = false;
@@ -21,7 +21,7 @@ function Game() {
         if (!ignore) {
           setSongsByAlbum(response.data.results);
           setNameOfTheSongs(response.data.results);
-          sortNumber();
+          setSortedNumber();
         }
       })
       .catch((error) => {
@@ -33,7 +33,7 @@ function Game() {
     return () => {
       ignore = true;
     };
-  }, [setSongsByAlbum, sortNumber, setNameOfTheSongs]);
+  }, [setSongsByAlbum, setSortedNumber, setNameOfTheSongs]);
 
   console.log('right answer', songsByAlbum[sortedNumber]?.trackName);
   console.log('total of tracks', songsByAlbum?.length);

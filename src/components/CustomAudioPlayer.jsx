@@ -8,11 +8,11 @@ export default function CustomAudioPlayer() {
   const audioRef = useRef();
 
   const { songsByAlbum, sortedNumber, isPlayBtnClicked, actions } = useStore();
-  const { setDuration, setPausedTime, setIsClickedPlayBtn } = actions;
+  const { setDuration, setPausedTime, setIsPlayBtnClicked } = actions;
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
-    setIsClickedPlayBtn(!isPlayBtnClicked);
+    setIsPlayBtnClicked(!isPlayBtnClicked);
     if (audio.paused) {
       audio.play();
     } else {

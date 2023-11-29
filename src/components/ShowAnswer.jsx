@@ -1,4 +1,4 @@
-import { useStore } from '../store/gameStore';
+import { useStore } from '../store/GameStore';
 import Box from '@mui/material/Box';
 import Zoom from '@mui/material/Zoom';
 

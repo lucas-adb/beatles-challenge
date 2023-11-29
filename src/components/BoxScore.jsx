@@ -1,4 +1,4 @@
-import { useStore } from '../store/gameStore';
+import { useStore } from '../store/GameStore';
 import Box from '@mui/material/Box';
 
 function BoxScore() {

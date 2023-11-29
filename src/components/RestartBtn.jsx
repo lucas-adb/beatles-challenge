@@ -1,14 +1,14 @@
-import { useStore } from '../store/gameStore';
+import { useStore } from '../store/GameStore';
 import { Button } from '@mui/material';
 
 function RestartBtn() {
   const { isAnswerCorrect, actions } = useStore();
   const {
     setIsComboBoxDisabled,
-    sortNumber,
+    setSortedNumber,
     setIsAnswerCorrect,
     setPausedTime,
-    setIsClickedPlayBtn,
+    setIsPlayBtnClicked,
     setScoreToZero,
     resetPlayedTracksId,
   } = actions;
@@ -16,10 +16,10 @@ function RestartBtn() {
   const restartGame = () => {
     setScoreToZero();
     resetPlayedTracksId();
-    sortNumber();
+    setSortedNumber();
     setIsAnswerCorrect();
     setPausedTime();
-    setIsClickedPlayBtn(false);
+    setIsPlayBtnClicked(false);
     setIsComboBoxDisabled();
   };
 

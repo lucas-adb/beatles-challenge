@@ -4,7 +4,7 @@ import { useStore } from '../store/GameStore';
 
 export default function ComboBox() {
   const { nameOfTheSongs, answer, isComboBoxDisabled, actions } = useStore();
-  const { saveAnswer } = actions;
+  const { setAnswer } = actions;
 
   return (
     <Autocomplete
@@ -16,8 +16,8 @@ export default function ComboBox() {
       sx={{ marginBottom: 2 }}
       renderInput={(params) => <TextField {...params} label="Songs" />}
       value={answer}
-      onChange={(event, newValue) => {
-        saveAnswer(newValue);
+      onChange={(_, newValue) => {
+        setAnswer(newValue);
       }}
     />
   );

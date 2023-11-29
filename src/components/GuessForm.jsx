@@ -12,7 +12,7 @@ export default function GuessForm() {
     actions,
   } = useStore();
   const {
-    savePlayedTracksId,
+    setPlayedTracksId,
     setScore,
     eraseAnswer,
     setIsAnswerCorrect,
@@ -24,7 +24,7 @@ export default function GuessForm() {
       setIsAnswerCorrect(false);
     } else {
       setIsAnswerCorrect(true);
-      savePlayedTracksId();
+      setPlayedTracksId();
       setScore();
     }
   };
@@ -41,9 +41,6 @@ export default function GuessForm() {
     if (playedTracksId.length >= songsByAlbum.length) return true;
     return true;
   };
-
-  console.log('answer', answer);
-  console.log('pausedTime', pausedTime);
 
   return (
     <form onSubmit={handleSubmit}>

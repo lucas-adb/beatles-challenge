@@ -1,22 +1,22 @@
-import { useStore } from '../store/gameStore';
+import { useStore } from '../store/GameStore';
 import { Button } from '@mui/material';
 
 function NextBtn() {
   const { isAnswerCorrect, playedTracksId, songsByAlbum, actions } = useStore();
   const {
     setIsComboBoxDisabled,
-    sortNumber,
+    setSortedNumber,
     setIsAnswerCorrect,
     setPausedTime,
-    setIsClickedPlayBtn,
+    setIsPlayBtnClicked,
   } = actions;
 
   const goToNextSong = () => {
     setIsComboBoxDisabled();
-    sortNumber();
+    setSortedNumber();
     setIsAnswerCorrect();
     setPausedTime();
-    setIsClickedPlayBtn(false);
+    setIsPlayBtnClicked(false);
   };
 
   const isNextButtonDisable = () => {
