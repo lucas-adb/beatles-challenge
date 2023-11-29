@@ -58,7 +58,7 @@ export const useStore = create((set, get) => ({
     setScore: () =>
       set((state) => {
         const { duration, pausedTime } = get();
-        const sum = (duration - pausedTime) * 100;
+        const sum = (duration - pausedTime) * 10;
         const score = parseInt(sum.toFixed(0), 10);
         return {
           score: state.score + score,
