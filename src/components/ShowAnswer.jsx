@@ -15,7 +15,7 @@ function ShowAnswer() {
 
       {isAnswerCorrect && (
         <Box sx={{ color: 'success.main' }}>
-          <Zoom in={true}>{<h2>Correct! ✅</h2>}</Zoom>
+          <Zoom in={true}>{<h2 data-testid="result">Correct! ✅</h2>}</Zoom>
         </Box>
       )}
     </>

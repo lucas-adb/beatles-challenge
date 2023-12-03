@@ -11,11 +11,27 @@ export default function CustomAudioPlayer() {
   const { songsByAlbum, sortedNumber, isPlayBtnClicked, actions } = useStore();
   const { setDuration, setPausedTime, setIsPlayBtnClicked } = actions;
 
+  // const togglePlayPause = () => {
+  //   const audio = audioRef.current;
+  //   setIsPlayBtnClicked(!isPlayBtnClicked);
+  //   if (audio.paused) {
+  //     audio.play();
+  //   } else {
+  //     audio.pause();
+  //   }
+  // };
+
   const togglePlayPause = () => {
     const audio = audioRef.current;
     setIsPlayBtnClicked(!isPlayBtnClicked);
     if (audio.paused) {
-      audio.play();
+      audio.play().catch((error) => {
+        if (error.name === 'AbortError') {
+          console.log('Caught AbortError. Ignoring...');
+        } else {
+          throw error;
+        }
+      });
     } else {
       audio.pause();
     }
