@@ -46,6 +46,7 @@ export default function CustomAudioPlayer() {
       ></audio>
 
       <IconButton
+        data-testid="player-btn"
         ref={buttonRef}
         aria-label="play-stop"
         sx={{ width: 140, margin: '0 auto' }}

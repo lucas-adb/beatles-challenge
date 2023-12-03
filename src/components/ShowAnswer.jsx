@@ -9,7 +9,7 @@ function ShowAnswer() {
     <>
       {!isAnswerCorrect && isAnswerCorrect !== null && (
         <Box sx={{ color: 'error.main' }}>
-          <Zoom in={true}>{<h2>Wrong! ❌</h2>}</Zoom>
+          <Zoom in={true}>{<h2 data-testid="result">Wrong! ❌</h2>}</Zoom>
         </Box>
       )}
 
