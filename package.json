@@ -18,17 +18,12 @@
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
-    "axios": "^1.6.2",
-    "jest-mock-axios": "^4.7.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^4.4.6"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.1.5",
-    "@testing-library/react": "^14.1.2",
     "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "cypress": "^13.6.0",
     "eslint": "^8.45.0",
