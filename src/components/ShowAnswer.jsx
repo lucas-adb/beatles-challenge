@@ -9,13 +9,13 @@ function ShowAnswer() {
     <>
       {!isAnswerCorrect && isAnswerCorrect !== null && (
         <Box sx={{ color: 'error.main' }}>
-          <Zoom in={true}>{<h2>Wrong! ❌</h2>}</Zoom>
+          <Zoom in={true}>{<h2 data-testid="result">Wrong! ❌</h2>}</Zoom>
         </Box>
       )}
 
       {isAnswerCorrect && (
         <Box sx={{ color: 'success.main' }}>
-          <Zoom in={true}>{<h2>Correct! ✅</h2>}</Zoom>
+          <Zoom in={true}>{<h2 data-testid="result">Correct! ✅</h2>}</Zoom>
         </Box>
       )}
     </>

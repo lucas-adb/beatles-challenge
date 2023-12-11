@@ -11,7 +11,7 @@ import RestartBtn from '../components/RestartBtn';
 import BoxScore from '../components/BoxScore';
 
 function Game() {
-  const { songsByAlbum, sortedNumber, actions } = useStore();
+  const { actions } = useStore();
   const { setSongsByAlbum, setSortedNumber, setNameOfTheSongs } = actions;
 
   useEffect(() => {
@@ -34,9 +34,6 @@ function Game() {
       ignore = true;
     };
   }, [setSongsByAlbum, setSortedNumber, setNameOfTheSongs]);
-
-  console.log('right answer', songsByAlbum[sortedNumber]?.trackName);
-  console.log('total of tracks', songsByAlbum?.length);
 
   return (
     <Container maxWidth="sm">

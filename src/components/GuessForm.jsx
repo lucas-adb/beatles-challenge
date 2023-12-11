@@ -47,6 +47,7 @@ export default function GuessForm() {
       <ComboBox />
 
       <Button
+        data-testid="answer-btn"
         type="submit"
         disabled={isAnswerButtonDisable()}
         variant="contained"
