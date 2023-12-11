@@ -1,8 +1,14 @@
 {
   "name": "beatles-challenge",
+  "author": {
+    "name": "Lucas Alves",
+    "email": "alvesdebrito.lucas@gmail.com"
+  },
   "private": true,
   "version": "0.0.0",
+  "description": "A guessing game with Beatles songs.",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "test": "vitest",
     "cy:open": "cypress open",
