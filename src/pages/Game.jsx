@@ -24,8 +24,21 @@ function Game() {
       .then((response) => {
         if (!ignore) {
           const flatResponse = response.flat();
-          setSongsByAlbum(flatResponse);
-          setNameOfTheSongs(flatResponse);
+
+          // console.log(flatResponse);
+          // setSongsByAlbum(flatResponse);
+          // setNameOfTheSongs(flatResponse);
+          // setSortedNumber();
+
+          const uniqueSongs = flatResponse.filter((song, index) => {
+            return (
+              index ===
+              flatResponse.findIndex((obj) => obj.trackName === song.trackName)
+            );
+          });
+
+          setSongsByAlbum(uniqueSongs);
+          setNameOfTheSongs(uniqueSongs);
           setSortedNumber();
         }
       })

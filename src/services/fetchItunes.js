@@ -1,17 +1,17 @@
 export const AlbumsId = {
-  pleasePleaseMe: '1441164816',
-  withTheBeatles: '1441164362',
-  aHardDaysNight: '1441164416',
-  beatlesForSale: '1441165005',
-  help: '1441164524',
-  rubberSoul: '1441164359',
+  // pleasePleaseMe: '1441164816',
+  // withTheBeatles: '1441164362',
+  // aHardDaysNight: '1441164416',
+  // beatlesForSale: '1441165005',
+  // help: '1441164524',
+  // rubberSoul: '1441164359',
   revolver: '1441164670',
-  sgtPeppersLonelyHeartsClubBand: '1573250333',
-  magicalMysteryTour: '1441163490',
-  theBeatlesWhiteAlbum: '1441133180',
+  // sgtPeppersLonelyHeartsClubBand: '1573250333',
+  // magicalMysteryTour: '1441163490',
+  // theBeatlesWhiteAlbum: '1441133180',
   yellowSubmarine: '1441164525',
-  abbeyRoad: '1441164426',
-  letItBe: '1441164495',
+  // abbeyRoad: '1441164426',
+  // letItBe: '1441164495',
 };
 
 // export async function getSongsFromAlbum(id) {
