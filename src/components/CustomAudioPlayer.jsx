@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useStore } from '../store/GameStore';
 import IconButton from '@mui/material/IconButton';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
@@ -6,7 +6,6 @@ import StopCircleIcon from '@mui/icons-material/StopCircle';
 
 export default function CustomAudioPlayer() {
   const audioRef = useRef();
-  const buttonRef = useRef();
 
   const { songsByAlbum, sortedNumber, isPlayBtnClicked, actions } = useStore();
   const { setDuration, setPausedTime, setIsPlayBtnClicked } = actions;
@@ -37,20 +36,6 @@ export default function CustomAudioPlayer() {
     }
   };
 
-  useEffect(() => {
-    const handleSpacebarPress = (event) => {
-      if (event.code === 'Space') {
-        buttonRef.current.click();
-      }
-    };
-
-    window.addEventListener('keydown', handleSpacebarPress);
-
-    return () => {
-      window.removeEventListener('keydown', handleSpacebarPress);
-    };
-  }, []);
-
   return (
     <>
       <audio
@@ -63,7 +48,6 @@ export default function CustomAudioPlayer() {
 
       <IconButton
         data-testid="player-btn"
-        ref={buttonRef}
         aria-label="play-stop"
         sx={{ width: 140, margin: '0 auto' }}
         onClick={togglePlayPause}
