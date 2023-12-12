@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import { useStore } from '../store/GameStore';
-import { getSongsFromAlbum } from '../services/fetchItunes';
+import {
+  AlbumsId,
+  // getSongsFromAlbum,
+  getSongsFromAllAlbums,
+} from '../services/fetchItunes';
 import CustomAudioPlayer from '../components/CustomAudioPlayer';
 import GuessForm from '../components/GuessForm';
 import Container from '@mui/material/Container';
@@ -16,11 +20,12 @@ function Game() {
 
   useEffect(() => {
     let ignore = false;
-    getSongsFromAlbum('1441164816')
+    getSongsFromAllAlbums(AlbumsId)
       .then((response) => {
         if (!ignore) {
-          setSongsByAlbum(response.data.results);
-          setNameOfTheSongs(response.data.results);
+          const flatResponse = response.flat();
+          setSongsByAlbum(flatResponse);
+          setNameOfTheSongs(flatResponse);
           setSortedNumber();
         }
       })
@@ -62,3 +67,24 @@ function Game() {
 }
 
 export default Game;
+
+// useEffect(() => {
+//   let ignore = false;
+//   getSongsFromAlbum('1441164816')
+//     .then((response) => {
+//       if (!ignore) {
+//         setSongsByAlbum(response.data.results);
+//         setNameOfTheSongs(response.data.results);
+//         setSortedNumber();
+//       }
+//     })
+//     .catch((error) => {
+//       if (!ignore) {
+//         console.error(error.message);
+//       }
+//     });
+
+//   return () => {
+//     ignore = true;
+//   };
+// }, [setSongsByAlbum, setSortedNumber, setNameOfTheSongs]);

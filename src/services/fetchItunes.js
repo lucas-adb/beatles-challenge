@@ -30,6 +30,31 @@ export const AlbumsId = {
 //   }
 // }
 
+// export async function getSongsFromAlbum(id) {
+//   try {
+//     const response = await fetch(`/api/lookup?id=${id}&entity=song`);
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     return { data: data };
+//   } catch (error) {
+//     console.error(error);
+//     return error;
+//   }
+// }
+
+// export async function getSongsFromAllAlbuns(AlbumsId) {
+//   let results = [];
+
+//   AlbumsId.forEach((element) => {
+//     const album = getSongsFromAlbum(element);
+//     results = [...album];
+//   });
+
+//   return results;
+// }
+
 export async function getSongsFromAlbum(id) {
   try {
     const response = await fetch(`/api/lookup?id=${id}&entity=song`);
@@ -37,9 +62,15 @@ export async function getSongsFromAlbum(id) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    return { data: data };
+    return data.results;
   } catch (error) {
     console.error(error);
     return error;
   }
+}
+
+export async function getSongsFromAllAlbums(AlbumsId) {
+  const promises = Object.values(AlbumsId).map((id) => getSongsFromAlbum(id));
+  const results = await Promise.all(promises);
+  return results;
 }
