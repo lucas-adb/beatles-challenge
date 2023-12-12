@@ -7,6 +7,8 @@
 
 ## BETA VERSION: Game in Construction👷🚧
 
+Play <a href="https://beatles-challenge.netlify.app/">here 👇</a>
+
 ## Description
 
 A guessing game with Beatles songs.
