@@ -12,6 +12,7 @@ export const AlbumsId = {
   yellowSubmarine: '1441164525',
   abbeyRoad: '1441164426',
   letItBe: '1441164495',
+  pastMasters: '1441133181',
 };
 
 // export async function getSongsFromAlbum(id) {
@@ -28,31 +29,6 @@ export const AlbumsId = {
 //     console.error(error);
 //     return error;
 //   }
-// }
-
-// export async function getSongsFromAlbum(id) {
-//   try {
-//     const response = await fetch(`/api/lookup?id=${id}&entity=song`);
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-//     const data = await response.json();
-//     return { data: data };
-//   } catch (error) {
-//     console.error(error);
-//     return error;
-//   }
-// }
-
-// export async function getSongsFromAllAlbuns(AlbumsId) {
-//   let results = [];
-
-//   AlbumsId.forEach((element) => {
-//     const album = getSongsFromAlbum(element);
-//     results = [...album];
-//   });
-
-//   return results;
 // }
 
 export async function getSongsFromAlbum(id) {
