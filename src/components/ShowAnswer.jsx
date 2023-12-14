@@ -3,13 +3,24 @@ import Box from '@mui/material/Box';
 import Zoom from '@mui/material/Zoom';
 
 function ShowAnswer() {
-  const { isAnswerCorrect } = useStore();
+  const { isAnswerCorrect, songsByAlbum, sortedNumber } = useStore();
+
+  const rightAnswer = songsByAlbum[sortedNumber]?.trackName;
 
   return (
     <>
-      {!isAnswerCorrect && isAnswerCorrect !== null && (
+      {!isAnswerCorrect && isAnswerCorrect !== null && rightAnswer && (
         <Box sx={{ color: 'error.main' }}>
           <Zoom in={true}>{<h2 data-testid="result">Wrong! ❌</h2>}</Zoom>
+          <Box sx={{ color: 'white' }}>
+            <Zoom in={true}>
+              {
+                <p>
+                  Right answer: <b>{rightAnswer}</b>
+                </p>
+              }
+            </Zoom>
+          </Box>
         </Box>
       )}
 
